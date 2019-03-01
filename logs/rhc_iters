@@ -1,0 +1,215 @@
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=100
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.128493070602417
+loss: 0.5391851373140173
+training data accuracy: 83.33333333333334%
+testing data accuracy: 88.23529411764706%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=500
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.864520788192749
+loss: 0.35738744654848453
+training data accuracy: 97.66666666666667%
+testing data accuracy: 92.15686274509804%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1000
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 1.6218676567077637
+loss: 0.3515231269204448
+training data accuracy: 98.66666666666667%
+testing data accuracy: 92.15686274509804%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1500
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.4116711616516113
+loss: 0.3512203619440326
+training data accuracy: 99.0%
+testing data accuracy: 94.11764705882352%
+------------------------------------------------------
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=100,lrate=0.001
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.18341541290283203
+loss: 0.6286963573266788
+training data accuracy: 81.66666666666667%
+testing data accuracy: 80.3921568627451%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=500,lrate=0.001
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 1.019517183303833
+loss: 0.6283900436203654
+training data accuracy: 81.66666666666667%
+testing data accuracy: 80.3921568627451%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1000,lrate=0.001
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.0042762756347656
+loss: 0.6280814486069395
+training data accuracy: 81.33333333333333%
+testing data accuracy: 82.35294117647058%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1500,lrate=0.001
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.8987889289855957
+loss: 0.627805461855369
+training data accuracy: 81.0%
+testing data accuracy: 82.35294117647058%`
+------------------------------------------------------
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=100,lrate=0.01
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.18240976333618164
+loss: 0.6281380496681208
+training data accuracy: 81.66666666666667%
+testing data accuracy: 80.3921568627451%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=500,lrate=0.01
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.9757080078125
+loss: 0.6253039021947906
+training data accuracy: 81.0%
+testing data accuracy: 82.35294117647058%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1000,lrate=0.01
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.0041072368621826
+loss: 0.6221848441740078
+training data accuracy: 81.33333333333333%
+testing data accuracy: 82.35294117647058%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1500,lrate=0.01
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.969188928604126
+loss: 0.6193839337279485
+training data accuracy: 80.66666666666666%
+testing data accuracy: 82.35294117647058%
+------------------------------------------------------
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=100,lrate=1
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.1833481788635254
+loss: 0.5876736417620557
+training data accuracy: 84.0%
+testing data accuracy: 86.27450980392157%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=500,lrate=1
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.9659011363983154
+loss: 0.41095942488129855
+training data accuracy: 95.33333333333334%
+testing data accuracy: 92.15686274509804%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1000,lrate=1
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 1.8585083484649658
+loss: 0.37056802264249217
+training data accuracy: 96.66666666666667%
+testing data accuracy: 92.15686274509804%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1500,lrate=1
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.747389316558838
+loss: 0.3612678311897913
+training data accuracy: 97.66666666666667%
+testing data accuracy: 92.15686274509804%
+-------------------------------------------
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=100,lrate=100
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.06144309043884277
+loss: 0.5694095718995231
+training data accuracy: 88.33333333333333%
+testing data accuracy: 80.3921568627451%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1500,lrate=100
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 2.4231984615325928
+loss: 0.36805341406770525
+training data accuracy: 96.33333333333334%
+testing data accuracy: 80.3921568627451%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=500,lrate=100
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 0.5369517803192139
+loss: 0.39457503532883825
+training data accuracy: 93.33333333333333%
+testing data accuracy: 76.47058823529412%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=1000,lrate=100
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 1.6521270275115967
+loss: 0.3737433418033037
+training data accuracy: 94.66666666666667%
+testing data accuracy: 76.47058823529412%
+(venv) nosus@basalt:~/workstation/ml_proj_2$ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pickle -o max_iter=2000,lrate=100
+[INFO] loading encodings...
+[INFO] Finish loading! Get 300 faces
+[INFO] loading encodings...
+[INFO] Finish loading! Get 51 faces
+************** after RO by random_hill_climb ***************
+training time: 3.2911977767944336
+loss: 0.3557348960136133
+training data accuracy: 97.66666666666667%
+testing data accuracy: 82.35294117647058%
+

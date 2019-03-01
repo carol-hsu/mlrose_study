@@ -14,15 +14,14 @@ $ virtualenv venv
 (venv) $ pip install -r requirements.txt
 ```
 
-##Run randomized weights optimization
+## Run randomized weights optimization
 
 ### Paramters for algorithms
 - `max_iter`: integer, the maximum number of training iteration, default `1000`
-- `max_attempt`: integer, the maximum number of attempts, the training may stop eariler while reaching a good enough state, default `100`
 - `max_clip`: integer, the range of weights would be set as [-MAX_CLIP, MAX_CLIP], default `10`
 - `lrate`: float, learning rate, default `0.1`
 - `sched`: `0`, `1`, or `2`, choose the decay schedule only used for **simulated annealing**'s temperature parameter, 0=geometrically decay 1=arithmetically decay 2=exponentially decay, default `0`
 - `pop_size`: integer, size of population, used only for **genetic algorithm**, default `1000`
-- `mut_prob`: float, limited to [0, 1], the probability of mutation, used only for **genetic algorithm**
+- `mut_prob`: float, limited to [0, 1], the probability of mutation, used only for **genetic algorithm**, default `0.1`
 
-##Run 8-Queen problem with randomized optimization
+## Run 8-Queen problem with randomized optimization

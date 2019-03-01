@@ -1,17 +1,13 @@
 # USAGE
 # python recognize_faces_image.py --encodings encodings.pickle --image examples/example_01.png 
 
-# import the necessary packages
-#import face_recognition
 import argparse
 import pickle
 import cv2
-from sklearn.model_selection import train_test_split
 import numpy as np
 import mlrose
 from sklearn.metrics import accuracy_score
-#from imutils import paths
-#from neural_network import network_manager
+import time 
 
 DETECTION_METHOD="cnn"
 THE_ONE="natalie_portman"
@@ -52,16 +48,21 @@ def load_encodings(encoding_file):
             break
 
     return data
-#
-#def data_preprocessing(dataset):
-#    return 
 
-def accuracy(predicts, answers):
-    correct = len(answers)
-    for i in range(len(answers)):
-        if (predicts[i] == "unknown") or (predicts[i] != answers[i]):
-            correct-=1
-    print(correct/float(len(answers))*100)
+def option_parser(input_param):
+    #return a map of options
+    params={"max_iter": 1000, "max_clip": 10, "lrate": 0.1, \
+            "sched": 0, \
+            "pop_size": 1000, "mut_prob": 0.1}
+    if input_param:
+        pairs = input_param.split(",")
+        for opt in pairs:
+            key_value = opt.split("=")
+            if key_value[0] in params.keys():
+                params[key_value[0]] = float(key_value[1])
+
+    return params
+        
 
 if __name__ == "__main__":
     # construct the argument parser and parse the arguments
@@ -70,15 +71,19 @@ if __name__ == "__main__":
             help="directory of training set/encodings of training set")
     ap.add_argument("-t", "--test", required=True,
             help="directory of testing set/encodings of testing set")
+    ap.add_argument("-r", "--optimization-algo", type=int, default=1,
+            help="Use which randomized optimization algorithms: 1)random hill climbing 2)simulated annealing 3)genetic algorithm, default=1")
+    ap.add_argument("-o", "--options",
+            help="setting options based on the algorithms, configure in KEY=VALUE pair, and separate by comma. E.g. max_iter=1000,lrate=0.1 check\
+                    README for complete configurable options")
     params = vars(ap.parse_args())
     
-    
+    options = option_parser(params["options"])
+
+
+    algos = ["gradient_descent", "random_hill_climb", "simulated_annealing", "genetic_alg"]
     faces = load_encodings(params["train"])
     test_faces = load_encodings(params["test"])
-    # preprocess data
-#    X_train, X_test, y_train, y_test = train_test_split(faces["encodings"], faces["names"], \
-#                                                        test_size=0.2, random_state = 1)
-
 
     # make target to binary list
     X_train = faces["encodings"]
@@ -88,25 +93,66 @@ if __name__ == "__main__":
 
     np.random.seed(1)
     # build neural network
-    nn_model = mlrose.NeuralNetwork(hidden_nodes = [50, 20, 8, 2], activation = activ[param["activation"]], \
-                                 algorithm = algos[param["algo"]], max_iters = 1000, \
-                                 #algorithm = 'gradient_descent', max_iters = 1000, \
-                                 bias = True, is_classifier = True, learning_rate = 0.001, \
-                                 early_stopping = True, clip_max = 10, max_attempts = 100)
+    based_model = mlrose.NeuralNetwork(hidden_nodes = [50, 20, 8, 2], activation = "relu", \
+                                       bias = True, is_classifier = True, early_stopping = True, \
+                                       algorithm=algos[0], \
+                                       max_iters=1000, max_attempts = 100, \
+                                       learning_rate = 0.001)
 
-#    for i in range(6):
-#        print(i)
-#        X_train, X_tmp, y_train, y_tmp = train_test_split(X_init_train, y_init_train, \
-#                                                            test_size=0.1, random_state = i)
-#        if len(nn_model.fitted_weights):
-#            train_pred = nn_model.predict(X_train)
-#            print(accuracy_score(y_train, train_pred))
-#            #fit different training set each time
-#            nn_model.fit(X_train, y_train, nn_model.fitted_weights)
-#        else:
-#            nn_model.fit(X_train, y_train)
+
+#    print("************** based network ***************")
+#    start_train = time.time() 
+    based_model.fit(X_train, y_train) 
+#    print ("training time: "+str(time.time()-start_train))
+#    print("loss: "+str(based_model.loss))
+#    
+#    test_pred = based_model.predict(X_train)
+#    print("training data accuracy: "+str(accuracy_score(y_train, test_pred)*100)+"%")
+#
+#    test_pred = based_model.predict(X_test)
+#    #print(based_model.predicted_probs)
+#    print("testing data accuracy: "+str(accuracy_score(y_test, test_pred)*100)+"%")
+
+    # RHC
+    opti_model = mlrose.NeuralNetwork(hidden_nodes = [50, 20, 8, 2], activation = "relu", \
+                                      bias = True, is_classifier = True, early_stopping = True, \
+                                      algorithm=algos[1], \
+                                      max_iters=options["max_iter"], max_attempts=options["max_iter"]*0.1, \
+                                      learning_rate=options["lrate"])
+
+    if params["optimization_algo"] == 2: # SA
+        schedule = mlrose.GeomDecay()
+        if options["sched"] == 1:
+            schedule = mlrose.ArithDecay()
+        elif options["sched"] == 2:
+            schedule = mlrose.ExpDecay()
+
+        opti_model = mlrose.NeuralNetwork(hidden_nodes = [50, 20, 8, 2], activation = "relu", \
+                                          bias = True, is_classifier = True, early_stopping = True, \
+                                          algorithm=algos[2], \
+                                          max_iters=options["max_iter"], max_attempts=options["max_iter"]*0.1, \
+                                          learning_rate=options["lrate"], \
+                                          schedule=schedule)
     
-    nn_model.fit(X_train, y_train)
+    elif params["optimization_algo"] == 3: #GA
+        opti_model = mlrose.NeuralNetwork(hidden_nodes = [50, 20, 8, 2], activation = "relu", \
+                                          bias = True, is_classifier = True, early_stopping = True, \
+                                          algorithm=algos[3], \
+                                          max_iters=options["max_iter"], max_attempts=options["max_iter"]*0.1, \
+                                          learning_rate=options["lrate"], \
+                                          pop_size=options["pop_size"], mutation_prob=options["mut_prob"])
 
-    test_pred = nn_model.predict(X_test)
-    print(accuracy_score(y_test, test_pred))
+    print("************** after RO by "+algos[params["optimization_algo"]]+" ***************")
+
+    start_train = time.time() 
+    opti_model.fit(X_train, y_train, based_model.fitted_weights)
+    print ("training time: "+str(time.time()-start_train))
+    print("loss: "+str(opti_model.loss))
+    
+    test_pred = opti_model.predict(X_train)
+    print("training data accuracy: "+str(accuracy_score(y_train, test_pred)*100)+"%")
+
+    test_pred = opti_model.predict(X_test)
+    #print(opti_model.predicted_probs)
+    print("testing data accuracy: "+str(accuracy_score(y_test, test_pred)*100)+"%")
+    
