@@ -56,3 +56,33 @@ $ python face_recongnition.py -i pickles/pk_large.pickle -t pickles/pk_tiny.pick
 - `mut_prob`: float, limited to [0, 1], the probability of mutation, used only for **genetic algorithm**, default `0.4`
 
 ## Run 8-Queen problem with randomized optimization
+
+To run this problem, python file `eight_queen.py` is the entry point. 
+
+Check help messages `-h` for the details.
+
+```
+$ python eight_queen.py -h
+usage: eight_queen.py [-h] [-n NUMBER] [-i ITERATION] [-p PROBLEM] [-a ALGO]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NUMBER, --number NUMBER
+                        The number of queens, default: 8
+  -i ITERATION, --iteration ITERATION
+                        The number of iteration for optimizing, default: 1000
+  -p PROBLEM, --problem PROBLEM
+                        Use which of the optimzation problems: 0) discrete 1)
+                        continuous 2) TSP, default: 0
+  -a ALGO, --algo ALGO  Use which of the algorithms: 0) randomized hill
+                        climbing 1) simulated annealing 2) genetic algorithm
+                        3) MIMIC, default: 0
+```
+
+You may change the number of iterations and the number of queens as you wish.
+```
+// iteration=100 with 20 queens and using genetic algorithm
+$ python eight_queen.py -i 100 -n 20 -a 2
+The best state found is:  [6, 1, 16, 19, 0, 10, 18, 14, 17, 2, 11, 5, 14, 4, 12, 16, 4, 17, 14, 8]
+The fitness at the best state is:  0.9421052631578948
+```
