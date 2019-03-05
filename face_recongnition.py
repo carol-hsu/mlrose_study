@@ -1,6 +1,3 @@
-# USAGE
-# python recognize_faces_image.py --encodings encodings.pickle --image examples/example_01.png 
-
 import argparse
 import pickle
 import cv2
@@ -9,22 +6,7 @@ import mlrose
 from sklearn.metrics import accuracy_score
 import time 
 
-DETECTION_METHOD="cnn"
 THE_ONE="natalie_portman"
-
-def encode_image(image_file):
-    # load the input image and convert it from BGR to RGB
-    image = cv2.imread(image_file)
-    rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    
-    # detect the (x, y)-coordinates of the bounding boxes corresponding
-    # to each face in the input image, then compute the facial embeddings
-    # for each face
-    boxes = face_recognition.face_locations(rgb, model=DETECTION_METHOD)
-    encodings = face_recognition.face_encodings(rgb, boxes)
-
-    return encodings
-
 
 def load_encodings(encoding_file):
     # load the known faces and embeddings
@@ -51,9 +33,9 @@ def load_encodings(encoding_file):
 
 def option_parser(input_param):
     #return a map of options
-    params={"max_iter": 1000, "max_clip": 10, "lrate": 0.1, \
-            "sched": 0, \
-            "pop_size": 1000, "mut_prob": 0.1}
+    params={"max_iter": 1500, "max_clip": 10, "lrate": 10, \
+            "sched": 2, \
+            "pop_size": 100, "mut_prob": 0.4}
     if input_param:
         pairs = input_param.split(",")
         for opt in pairs:
@@ -100,18 +82,18 @@ if __name__ == "__main__":
                                        learning_rate = 0.001)
 
 
-#    print("************** based network ***************")
-#    start_train = time.time() 
+    print("************** based network ***************")
+    start_train = time.time() 
     based_model.fit(X_train, y_train) 
-#    print ("training time: "+str(time.time()-start_train))
-#    print("loss: "+str(based_model.loss))
-#    
-#    test_pred = based_model.predict(X_train)
-#    print("training data accuracy: "+str(accuracy_score(y_train, test_pred)*100)+"%")
-#
-#    test_pred = based_model.predict(X_test)
-#    #print(based_model.predicted_probs)
-#    print("testing data accuracy: "+str(accuracy_score(y_test, test_pred)*100)+"%")
+    print ("training time: "+str(time.time()-start_train))
+    print("loss: "+str(based_model.loss))
+    
+    test_pred = based_model.predict(X_train)
+    print("training data accuracy: "+str(accuracy_score(y_train, test_pred)*100)+"%")
+
+    test_pred = based_model.predict(X_test)
+    #print(based_model.predicted_probs)
+    print("testing data accuracy: "+str(accuracy_score(y_test, test_pred)*100)+"%")
 
     # RHC
     opti_model = mlrose.NeuralNetwork(hidden_nodes = [50, 20, 8, 2], activation = "relu", \
@@ -153,6 +135,6 @@ if __name__ == "__main__":
     print("training data accuracy: "+str(accuracy_score(y_train, test_pred)*100)+"%")
 
     test_pred = opti_model.predict(X_test)
-    #print(opti_model.predicted_probs)
+   # print(opti_model.predicted_probs)
     print("testing data accuracy: "+str(accuracy_score(y_test, test_pred)*100)+"%")
     

@@ -8,7 +8,7 @@ def queens_max(state):
     
     # Initialize counter
     fitness = 0
-    count_max = 0    
+
     # For all pairs of queens
     for i in range(len(state) - 1):
         for j in range(i + 1, len(state)):
